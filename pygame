@@ -1,0 +1,38 @@
+import pygame
+import sys
+
+# ビンゴカードの生成関数とビンゴカードの表示関数は前のコードを使用します
+
+# Pygameの初期化
+pygame.init()
+
+# ウィンドウの設定
+screen_width = 400
+screen_height = 400
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Bingo Card")
+
+# ゲームループ
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            x, y = event.pos
+            cell_size = screen_width // 5
+            clicked_row = y // cell_size
+            clicked_col = x // cell_size
+            print(f"Clicked on cell ({clicked_row + 1}, {clicked_col + 1})")
+
+    screen.fill((255, 255, 255))
+
+    # ビンゴカードを描画
+    for row in range(5):
+        for col in range(5):
+            pygame.draw.rect(screen, (0, 0, 0), (col * cell_size, row * cell_size, cell_size, cell_size), 1)
+
+    pygame.display.flip()
+
+pygame.quit()
+sys.exit()
